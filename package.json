@@ -1,0 +1,31 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bull": "^4.8.4",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "decamelize": "^6.0.0",
+    "dotenv": "^16.0.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "~1.9.1",
+    "pg": "^8.7.3",
+    "redis": "^4.2.0",
+    "sequelize": "^6.21.0",
+    "sqlite3": "^5.0.8"
+  },
+  "author": "Mohit",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.20.0"
+  }
+}
