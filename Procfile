@@ -1,4 +1,4 @@
 web: node app.js
-worker: node consumer.js
-worker: node producer.js
+consumer: node consumer.js
+producer: node producer.js
 worker: node listener.js
