@@ -1,5 +1,7 @@
 // /* eslint-disable no-unused-vars */
 import redis from "redis";
+import dotenv from "dotenv";
+dotenv.config();
 
 class Redis {
   static async connect() {
@@ -7,10 +9,10 @@ class Redis {
     try {
       client = redis.createClient({
         socket: {
-          host: "localhost",
-          port: 6379,
+          host: process.env.REDISHOST,
+          port: process.env.REDISPORT,
         },
-        password: "",
+        password: process.env.REDISPASSWORD,
       });
       await client.connect();
       console.log("redis connected successfully");
