@@ -9,7 +9,6 @@ import indexRouter from "./routes/index.js";
 import tradeRouter from "./routes/trade.js";
 import portfolioRouter from "./routes/portfolio.js";
 import cumulativeReturnsRouter from "./routes/returns.js";
-import { errorHandler } from "./middleware/validation.js";
 const app = express();
 initDb();
 
@@ -17,7 +16,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(errorHandler);
 // app.use(function (err, req, res, next) {
 //   console.log("errrr is ", err);
 //   res.status(err.status || 500);

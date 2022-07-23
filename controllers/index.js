@@ -5,7 +5,6 @@ import RedisClient from "../config/redis/connection.js";
 import fs from "fs";
 import { ErrorException } from "./error.js";
 import { ErrorCode } from "../constants/errorCode.js";
-// import { temp } from "../middleware/validation.js";
 
 export const addTradeinDb = async (trade) => {
   //If a trade is of type "sold" check If sufficient quantity is there to sell
@@ -41,10 +40,6 @@ export const getAllTradeIdsAvailable = async () => {
 };
 
 export const getTrades = async () => {
-  // let p =await StockModel.findAll({  group: ['StockModel.id'], include: {
-  //   model: TradeModel,
-  //   attributes:[]
-  // }});
   // let p =await StockModel.findAll({  include: {
   //   model: TradeModel,
   // },raw: true});
