@@ -30,6 +30,6 @@ app.use("/returns", cumulativeReturnsRouter);
 //   next(createError(404));
 // });
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log(`Smallcase listening on port 8000`);
 });
