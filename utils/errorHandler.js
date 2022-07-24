@@ -1,4 +1,5 @@
 import { ErrorCode } from "../constants/errorCode.js";
+
 export class ErrorException extends Error {
   status;
   metaData;

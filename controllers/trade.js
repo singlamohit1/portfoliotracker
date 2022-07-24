@@ -1,5 +1,5 @@
 import { TradeModel, StockModel } from "../config/db/model.js";
-import { ErrorException } from "./error.js";
+import { ErrorException } from "../utils/errorHandler.js";
 import { ErrorCode } from "../constants/errorCode.js";
 import { checkIfSufficientQuantity } from "./index.js";
 import { getTradeFromTradeId, checkTradeReversal } from "./index.js";

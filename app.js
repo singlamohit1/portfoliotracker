@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import dotenv from "dotenv";
 
 import { initDb } from "./config/db/model.js";
 import indexRouter from "./routes/index.js";
@@ -11,6 +12,7 @@ import portfolioRouter from "./routes/portfolio.js";
 import cumulativeReturnsRouter from "./routes/returns.js";
 const app = express();
 initDb();
+dotenv.config();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -36,7 +38,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:8000/",
+        url: process.env.SERVERURL,
       },
     ],
   },
