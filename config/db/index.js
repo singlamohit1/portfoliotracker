@@ -4,20 +4,23 @@ import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 const sequelize = new Sequelize(
-  process.env.Database,
-  process.env.User,
-  process.env.Password,
+  process.env.DBDATABASE,
+  process.env.DBUSER,
+  process.env.DBPASSWORD,
   {
-    host: process.env.Host,
-    port: process.env.Port,
+    host: process.env.DBHOST,
+    port: process.env.DBPORT,
     dialect: "postgres",
     logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    dialectOptions:
+      process.env.ENVIRONMENT !== "develop"
+        ? {
+            ssl: {
+              require: true,
+              rejectUnauthorized: false,
+            },
+          }
+        : undefined,
   }
 );
 

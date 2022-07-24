@@ -27,6 +27,7 @@ TradeModel.belongsTo(StockModel);
 
 export const initDb = async () => {
   await sequelize.sync();
+  console.log("Database connected!");
 
   console.log("now ---------------");
   await StockModel.create({

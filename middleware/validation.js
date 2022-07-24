@@ -5,12 +5,8 @@ import {
 } from "../controllers/index.js";
 
 export const reqBodyValidation = async (req, res, next) => {
-  console.log("inside validation");
   const tradeIds = await getAllStockIdsAvailable();
-  console.log("tradeIds is ", tradeIds);
-  console.log("t is ", typeof tradeIds[0]);
   const isValidTradeId = (id) => {
-    console.log("id is ", id, typeof id);
     if (!tradeIds.includes(parseInt(id))) {
       throw new Error("Stock doesn't exist");
     }
@@ -32,7 +28,6 @@ export const reqBodyValidation = async (req, res, next) => {
 };
 
 export const tradeIdValidation = async (req, res, next) => {
-  console.log("inside validation3");
   const tradeIds = await getAllTradeIdsAvailable();
   let cc = req.params.tradeId;
   if (!tradeIds.includes(parseInt(cc))) {

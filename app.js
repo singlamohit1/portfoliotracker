@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
-import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 import { initDb } from "./config/db/model.js";
 import indexRouter from "./routes/index.js";
@@ -16,19 +16,36 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(function (err, req, res, next) {
-//   console.log("errrr is ", err);
-//   res.status(err.status || 500);
-//   res.json({ error: err });
-// });
 
 app.use("/", indexRouter);
 app.use("/trade", tradeRouter);
 app.use("/portfolio", portfolioRouter);
 app.use("/returns", cumulativeReturnsRouter);
-// app.use(function (req, res, next) {
-//   next(createError(404));
-// });
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Smallcase Clone",
+      version: "1.0.0",
+      description: "This is a simple portfolio application(smallcase clone)",
+      contact: {
+        name: "Mohit Singla",
+        email: "singlamohit98@gmail.com",
+      },
+    },
+    servers: [
+      {
+        url: "http://localhost:8000/",
+      },
+    ],
+  },
+  apis: ["./src/app.js"],
+};
+
+const specs = swaggerJsdoc(options);
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`Smallcase listening on port 8000`);
