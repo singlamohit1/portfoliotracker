@@ -15,7 +15,6 @@ class Producer {
   }
 
   async produce() {
-    console.log("will produce");
     await this.jobQueue.add();
   }
 }

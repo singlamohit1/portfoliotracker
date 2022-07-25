@@ -16,15 +16,6 @@ dotenv.config();
 
 var router = express.Router();
 
-router.get("/", async function (req, res) {
-  try {
-    let result = await getTrades();
-    res.send(result);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
 router.post("/", reqBodyValidation, async function (req, res) {
   try {
     await addTradeinDb(req.body);
@@ -32,6 +23,15 @@ router.post("/", reqBodyValidation, async function (req, res) {
     res.send("Success");
   } catch (error) {
     return res.status(500).send({ message: error.metaData });
+  }
+});
+
+router.get("/", async function (req, res) {
+  try {
+    let result = await getTrades();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
@@ -67,4 +67,4 @@ router.delete("/:tradeId", tradeIdValidation, async function (req, res) {
   }
 });
 
-export default router;
+export const tradeRouter = router;

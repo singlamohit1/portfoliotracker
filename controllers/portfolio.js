@@ -4,26 +4,23 @@ import RedisClient from "../config/redis/connection.js";
 import fs from "fs";
 
 export const setPortfolio = async () => {
-  console.log("called");
   let temp = fs.readFileSync("portfolio.sql").toString();
 
   const records = await sequelize.query(temp, {
     type: QueryTypes.SELECT,
   });
-  console.log("records,", records);
-  RedisClient.set("myportfolio", JSON.stringify(records), (err, res) => {
+  await RedisClient.set("myportfolio", JSON.stringify(records), (err) => {
     if (err) throw err;
   });
 };
 
 export const getPortfolio = async () => {
-  console.log("get portoflio clled");
-  let portfolio = await RedisClient.get("myportfolio", (err, res) => {
+  let portfolio = await RedisClient.get("myportfolio", (err) => {
     if (err) throw err;
   });
   if (portfolio === null) {
     await setPortfolio();
-    portfolio = await RedisClient.get("myportfolio", (err, res) => {
+    portfolio = await RedisClient.get("myportfolio", (err) => {
       if (err) throw err;
     });
   }

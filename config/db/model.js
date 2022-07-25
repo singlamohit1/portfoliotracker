@@ -24,19 +24,3 @@ StockModel.hasOne(TradeModel, {
   allowNull: false,
 });
 TradeModel.belongsTo(StockModel);
-
-export const initDb = async () => {
-  await sequelize.sync();
-  console.log("Database connected!");
-
-  console.log("now ---------------");
-  await StockModel.create({
-    symbol: "TCS",
-  });
-  await StockModel.create({
-    symbol: "WIPRO",
-  });
-  await StockModel.create({
-    symbol: "GODREJIND",
-  });
-};

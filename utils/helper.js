@@ -53,26 +53,24 @@ export const checkTradeReversal = async (id, correspondingTrade, newTrade) => {
     if (!checkIfQuantityAlwaysPositive(tentativeTrades)) {
       return false;
     }
-    //now check RIL ones
-    // get all RIL ones and insert the current one there with correct timestamp
-    let RILtrades = await TradeModel.findAll({
+    let newStockTrades = await TradeModel.findAll({
       where: {
         stockId: newTrade.stockId,
       },
       order: [["createdAt", "ASC"]],
     });
 
-    let relTrades = [];
-    if (!RILtrades.length) {
-      relTrades.push(newTrade);
+    let tentativeNewStockTrades = [];
+    if (!newStockTrades.length) {
+      tentativeNewStockTrades.push(newTrade);
     }
-    for (const trade of RILtrades) {
+    for (const trade of newStockTrades) {
       if (trade.createdAt > correspondingTrade.createdAt) {
-        relTrades.push(newTrade);
+        tentativeNewStockTrades.push(newTrade);
       }
-      relTrades.push(trade);
+      tentativeNewStockTrades.push(trade);
     }
-    return checkIfQuantityAlwaysPositive(relTrades);
+    return checkIfQuantityAlwaysPositive(tentativeNewStockTrades);
   }
 };
 

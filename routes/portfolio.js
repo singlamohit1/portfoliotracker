@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import express from "express";
 import dotenv from "dotenv";
 import { getPortfolio } from "../controllers/index.js";
@@ -6,7 +5,7 @@ dotenv.config();
 
 var router = express.Router();
 
-router.get("/", async function (req, res, next) {
+router.get("/", async function (req, res) {
   try {
     let result = await getPortfolio();
     res.send(result);
@@ -15,4 +14,4 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-export default router;
+export const portfolioRouter = router;

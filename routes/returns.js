@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import express from "express";
 import dotenv from "dotenv";
 import { getReturns } from "../controllers/index.js";
 dotenv.config();
 
-var router = express.Router();
+const router = express.Router();
 
 router.get("/", async function (req, res) {
   try {
@@ -17,4 +16,4 @@ router.get("/", async function (req, res) {
   }
 });
 
-export default router;
+export const cumulativeReturnsRouter = router;

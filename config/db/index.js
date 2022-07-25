@@ -24,4 +24,9 @@ const sequelize = new Sequelize(
   }
 );
 
+export const initDb = async () => {
+  await sequelize.sync();
+  console.log("Database connected!");
+};
+
 export default sequelize;

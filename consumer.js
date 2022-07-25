@@ -13,12 +13,9 @@ class Consumer {
         password: process.env.REDISPASSWORD,
       },
     });
-    console.log("this.jobQueue is ", this.jobQueue);
   }
   async consume() {
-    console.log("will consume");
     this.jobQueue.process(async function () {
-      console.log("just now");
       await setPortfolio();
       return { result: "Success" };
     });
