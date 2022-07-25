@@ -27,12 +27,14 @@ Current Tables of DB-
 
 1. "stocks"
    columns - id, symbol
+
    current data in this table -
-   id symbol
-   1 TCS
-   2 WIPRO
-   3 GODREJIND
+   id  symbol
+   1   TCS
+   2   WIPRO
+   3   GODREJIND
 
 2. "trades"
    columns - id, quantity, price, type, stockId(foreign key), timestamps
+
    this table is currently empty
