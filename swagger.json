@@ -9,9 +9,9 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "https://portfolio-mohit.herokuapp.com/",
+  "host": "portfolio-mohit.herokuapp.com/",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
