@@ -4,6 +4,7 @@ import {
   getAllTradeIdsAvailable,
 } from "../controllers/index.js";
 
+// validate req body on update and delete
 export const reqBodyValidation = async (req, res, next) => {
   const tradeIds = await getAllStockIdsAvailable();
   const isValidTradeId = (id) => {
@@ -27,10 +28,11 @@ export const reqBodyValidation = async (req, res, next) => {
   }
 };
 
+// validate if trade id is correct
 export const tradeIdValidation = async (req, res, next) => {
   const tradeIds = await getAllTradeIdsAvailable();
-  let cc = req.params.tradeId;
-  if (!tradeIds.includes(parseInt(cc))) {
+  let tradeId = req.params.tradeId;
+  if (!tradeIds.includes(parseInt(tradeId))) {
     return res.status(406).send(`Invalid tradeId`);
   } else {
     next();

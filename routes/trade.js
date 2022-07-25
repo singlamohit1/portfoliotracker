@@ -7,7 +7,7 @@ import {
 import producer from "../producer.js";
 
 import {
-  addTradeinDb,
+  addTrade,
   deleteTrade,
   updateTrade,
   getTrades,
@@ -18,7 +18,8 @@ var router = express.Router();
 
 router.post("/", reqBodyValidation, async function (req, res) {
   try {
-    await addTradeinDb(req.body);
+    await addTrade(req.body);
+    // following command updates portfolio in redis
     producer.produce();
     res.send("Success");
   } catch (error) {
@@ -43,6 +44,7 @@ router.put(
     try {
       let result = await updateTrade(req.params.tradeId, req.body);
       if (result) {
+        // following command updates portfolio in redis
         producer.produce();
         return res.json("Success");
       }
@@ -59,6 +61,7 @@ router.delete("/:tradeId", tradeIdValidation, async function (req, res) {
   try {
     let ans = await deleteTrade(req.params.tradeId);
     if (ans) {
+      // following command updates portfolio in redis
       producer.produce();
       res.json("success");
     } else return res.status(400).send("Error in deleting the trade");

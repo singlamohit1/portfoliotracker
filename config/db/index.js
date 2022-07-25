@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { Sequelize } from "sequelize";
 
 import dotenv from "dotenv";
