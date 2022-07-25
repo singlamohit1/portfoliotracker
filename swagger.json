@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Trading Backend",
+    "description": "My trading app",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "https://portfolio-mohit.herokuapp.com/",
+  "basePath": "/",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Trades"],
+        "summary": "Healthcheck Endpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Healthcheck"
+            }
+          }
+        }
+      }
+    },
+    "/returns": {
+      "get": {
+        "tags": ["Trades"],
+        "summary": "Get cumulative returns",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Returns"
+            }
+          }
+        }
+      }
+    },
+    "/portfolio": {
+      "get": {
+        "tags": ["Trades"],
+        "summary": "Get portfolio",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Portfolio"
+            }
+          }
+        }
+      }
+    },
+    "/trade": {
+      "post": {
+        "tags": ["Trades"],
+        "summary": "Post a trade",
+        "description": "Create new trade in system",
+        "parameters": [
+          {
+            "name": "trade",
+            "in": "body",
+            "description": "Trade that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Trade"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New trade is created",
+            "schema": {
+              "$ref": "#/definitions/Trade"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Trades"],
+        "summary": "Get all stocks and their trades",
+        "description": "Get all stocks and their trades",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stocks and their corresponding trades fetched",
+            "schema": {
+              "$ref": "#/definitions/StockWithTrades"
+            }
+          }
+        }
+      }
+    },
+    "/trade/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of trade that we want to update/delete",
+          "type": "integer"
+        }
+      ],
+      "put": {
+        "summary": "Update trade with give ID",
+        "tags": ["Trades"],
+        "parameters": [
+          {
+            "name": "trade",
+            "in": "body",
+            "description": "Trade with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Trade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade is updated",
+            "schema": {
+              "$ref": "#/definitions/StringResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete trade with given ID",
+        "tags": ["Trade"],
+        "responses": {
+          "200": {
+            "description": "Trade is deleted",
+            "schema": {
+              "$ref": "#/definitions/StringResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Trades": {
+      "type": "array",
+      "$ref": "#/definitions/Trade"
+    },
+    "Trade": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["BUY", "SELL"]
+        },
+        "stockId": {
+          "type": "string"
+        }
+      }
+    },
+    "StockWithTrades": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "symbol": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "object",
+          "$ref": "#/definitions/Trade"
+        }
+      }
+    },
+    "Portfolio": {
+      "type": "array",
+      "$ref": "#/definitions/PortfolioEntry"
+    },
+    "PortfolioEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "sum": {
+          "type": "string"
+        },
+        "avgbuyingprice": {
+          "type": "integer"
+        }
+      }
+    },
+    "Returns": {
+      "type": "object",
+      "properties": {
+        "total returns": {
+          "type": "integer"
+        }
+      }
+    },
+    "Healthcheck": {
+      "type": "string"
+    },
+    "StringResponse": {
+      "type": "string"
+    }
+  }
+}
