@@ -1,4 +1,4 @@
-# smallcase-api
+# trade-api
 
 Tech Stack Used - Express.js, Postgres, Redis
 
@@ -18,23 +18,23 @@ Out of the box things done for better performance of application
 
 1. Since a person would want to get his portfolio multiple times so to get that It would not be a good choice to everytime hit the DB and run massive calculations since that that would be a very poor user experience. For that I am storing the user portfolio in redis since that would fetch results at lightening speed. Everytime user performs any trade I update the portfolio in redis.
 
-2. Updating the redis on every trade would mean longer response time so I am doing this process in a separate worker. Since nodejs runs on a single thread I am running separate jobs using a package called "Bull". I am following a producer, consumer and an event listener architecture for this.
-   Producer(producer.js) - For pushing the jobs(updating redis) in queue
-   Consumer(consumer.js) - For running the jobs
-   Event Listener(listerner.js) - To see If job ran successfully
+2. Updating the redis on every trade would mean longer response time so I am doing this process in a separate worker. Since nodejs runs on a single thread I am running separate jobs using a package called "Bull". I am following a producer, consumer and an event listener architecture for this.<br />
+   Producer(producer.js) - For pushing the jobs(updating portfolio through redis) in queue.<br />
+   Consumer(consumer.js) - For running the jobs. <br />
+   Event Listener(listener.js) - To see If job ran successfully. 
 
 Current Tables of DB-
 
-1. "stocks"
-   columns - id, symbol
+1. "stocks"<br />
+   columns - id, symbol<br />
 
-   current data in this table -
-   id  symbol
-   1   TCS
-   2   WIPRO
-   3   GODREJIND
+   current data in this table -<br />
+   id    symbol<br />
+   1      TCS<br />
+   2      WIPRO<br />
+   3      GODREJIND<br />
 
-2. "trades"
+2. "trades"<br />
    columns - id, quantity, price, type, stockId(foreign key), timestamps
 
    this table is currently empty
